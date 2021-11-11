@@ -13,21 +13,12 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
-            Button(action: { counter += 1 }) {
-                Text("Tap me")
-                    .padding()
-                    .background(Color(.tertiarySystemFill))
-                    .cornerRadius(5)
-            }
+            Button("Tap Me") { counter += 1 }
 
             if counter > 0 {
                 Text("You have tapped \(counter) times")
-            } else {
-                Text("You have not yet tapped")
             }
         }.debug()
-            .frame(width: 200, height: 200)
-            .border(Color.black)
     }
 }
 
