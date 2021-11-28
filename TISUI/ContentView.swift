@@ -9,26 +9,22 @@ import SwiftUI
 
 struct ContentView: View {
 
-    @State var counter = 0
-
     var body: some View {
-        return VStack {
-            Button("Tap Me") { counter += 1 }
-            LabelView(number: counter)
-        }
-        .debug()
+        LabelView()
+            .debug()
     }
 
 }
 
 struct LabelView: View {
-
-    let number: Int
+    
+    @State var counter = 0
 
     var body: some View {
-        return Group {
-            if number > 0 {
-                Text("You have tapped \(number) times")
+        VStack {
+            Button("Tap Me") { counter += 1 }
+            if counter > 0 {
+                Text("You have tapped \(counter) times")
             }
         }
         .debug()
