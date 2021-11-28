@@ -12,14 +12,28 @@ struct ContentView: View {
     @State var counter = 0
 
     var body: some View {
-        VStack {
+        return VStack {
             Button("Tap Me") { counter += 1 }
-
-            if counter > 0 {
-                Text("You have tapped \(counter) times")
-            }
-        }.debug()
+            LabelView(number: counter)
+        }
+        .debug()
     }
+
+}
+
+struct LabelView: View {
+
+    let number: Int
+
+    var body: some View {
+        return Group {
+            if number > 0 {
+                Text("You have tapped \(number) times")
+            }
+        }
+        .debug()
+    }
+
 }
 
 struct ContentView_Previews: PreviewProvider {
