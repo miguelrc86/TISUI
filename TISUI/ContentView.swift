@@ -24,7 +24,7 @@ struct LabelView: View {
     @Binding var number: Int
 
     var body: some View {
-        return Group {
+        Group {
             if number > 0 {
                 Text("You have tapped \(number) times")
             }
