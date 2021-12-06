@@ -12,9 +12,11 @@ struct ContentView: View {
     @State var counter = 0
 
     var body: some View {
-        Button("Tap Me") { counter += 1 }
-        LabelView(number: $counter)
-            .debug()
+        VStack {
+            Button("Tap Moi") { counter += 1 }
+            LabelView(number: $counter)
+        }
+        .debug()
     }
 
 }
