@@ -7,31 +7,47 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct KnobShape: Shape {
 
-    var counter = State(initialValue: 0)
+    var pointerSize: CGFloat = 0.1
+    var pointerWidth: CGFloat = 0.1
+
+    func path(in rect: CGRect) -> Path {
+        let pointerHeight = rect.height * pointerSize
+        let pointerWidth = rect.width * self.pointerWidth
+        let circleRect = rect.insetBy(dx: pointerHeight, dy: pointerHeight)
+
+        return Path { p in
+            p.addEllipse(in: circleRect)
+            p.addRect(CGRect(x: circleRect.midX - pointerWidth / 2,
+                             y: 2,
+                             width: pointerWidth,
+                             height: pointerHeight))
+        }
+    }
+}
+
+struct Knob: View {
+
+    var value: Double
+    var body: some View {
+        KnobShape()
+            .fill(Color.orange)
+            .rotationEffect(Angle(degrees: value * 350))
+    }
+}
+
+struct ContentView: View {
+    
+    @State var volume: Double = 0
 
     var body: some View {
         VStack {
-            Button("Tap Moi") { counter.wrappedValue += 1 }
-            LabelView(number: counter.projectedValue)
+            Knob(value: volume)
+                .frame(width: 100, height: 100)
+            Slider(value: $volume, in: 0...1)
+                .padding()
         }
-        .debug()
-    }
-
-}
-
-struct LabelView: View {
-
-    @Binding var number: Int
-
-    var body: some View {
-        Group {
-            if number > 0 {
-                Text("You have tapped \(number) times")
-            }
-        }
-        .debug()
     }
 
 }
