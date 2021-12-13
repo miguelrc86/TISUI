@@ -9,12 +9,12 @@ import SwiftUI
 
 struct ContentView: View {
 
-    @State var counter = 0
+    var counter = State(initialValue: 0)
 
     var body: some View {
         VStack {
-            Button("Tap Moi") { counter += 1 }
-            LabelView(number: $counter)
+            Button("Tap Moi") { counter.wrappedValue += 1 }
+            LabelView(number: counter.projectedValue)
         }
         .debug()
     }
