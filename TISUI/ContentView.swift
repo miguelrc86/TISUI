@@ -30,10 +30,15 @@ struct KnobShape: Shape {
 struct Knob: View {
 
     var value: Double
+    var valueChanged: (Double) -> ()
+
     var body: some View {
         KnobShape()
             .fill(Color.orange)
-            .rotationEffect(Angle(degrees: value * 350))
+            .rotationEffect(Angle(degrees: value * 345))
+            .onTapGesture {
+                self.valueChanged(self.value < 0.5 ? 1 : 0)
+            }
     }
 }
 
@@ -43,10 +48,13 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
-            Knob(value: volume)
+            Knob(value: volume, valueChanged: { newValue in
+                self.volume = newValue
+            })
                 .frame(width: 100, height: 100)
             Slider(value: $volume, in: 0...1)
                 .padding()
+            Text(String(format: "%.2f", volume))
         }
     }
 
